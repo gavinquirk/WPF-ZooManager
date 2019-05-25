@@ -33,8 +33,10 @@ namespace WPF_ZooManager
             string connectionString = ConfigurationManager.ConnectionStrings["WPF_ZooManager.Properties.Settings.gqdbConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             ShowZoos();
+            ShowAnimals();
         }
 
+        // Show all zoos in listZoos
         private void ShowZoos()
         {
             try
@@ -62,6 +64,35 @@ namespace WPF_ZooManager
             }
         }
 
+        // Show all animals in listAnimals
+        private void ShowAnimals()
+        {
+            try
+            {
+                string query = "select * from Animal";
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable animalTable = new DataTable();
+
+                    sqlDataAdapter.Fill(animalTable);
+
+                    // Which information of the Table in DataTable should be shown in the ListBox
+                    listAnimals.DisplayMemberPath = "Name";
+                    // Which Value should be delivered when an Item from the ListBox is selected
+                    listAnimals.SelectedValuePath = "Id";
+                    // The Reference to the Data the ListBox should populate
+                    listAnimals.ItemsSource = animalTable.DefaultView;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        // Show associated animals in associatedAnimals
         private void ShowAssociatedAnimals()
         {
             try
@@ -94,6 +125,7 @@ namespace WPF_ZooManager
             }
         }
 
+        // Display associated animals on zooList item click
         private void ListZoos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowAssociatedAnimals();
