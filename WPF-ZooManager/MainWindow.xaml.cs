@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace WPF_ZooManager
 {
@@ -23,6 +24,9 @@ namespace WPF_ZooManager
         public MainWindow()
         {
             InitializeComponent();
+
+            // Connection String Format: projectName.Properties.Settings.dataSourceString
+            string connectionString = ConfigurationManager.ConnectionStrings["WPF-ZooManager.Properties.Settings.gqdbConnectionString"].ConnectionString;
         }
     }
 }
