@@ -175,6 +175,7 @@ namespace WPF_ZooManager
             }
         }
 
+        // Add animal to zoo
         private void AddAnimalToZoo_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -194,6 +195,50 @@ namespace WPF_ZooManager
             {
                 sqlConnection.Close();
                 ShowAssociatedAnimals();
+            }
+        }
+
+        // Delete animal from all animals
+        private void DeleteAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "delete from Animal where id = @AnimalId";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAnimals.SelectedValue);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAnimals();
+            }
+        }
+
+        // Add new animal
+        private void AddAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "insert into Animal values (@Name)";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@Name", myTextBox.Text);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAnimals();
             }
         }
     }
