@@ -19,7 +19,7 @@
         <Button Content="Add Animal" HorizontalAlignment="Left" Margin="183,262,0,0" VerticalAlignment="Top" Width="139"/>
         <Button Content="Update Animal" HorizontalAlignment="Left" Margin="183,287,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="1.02,1.76"/>
         <Button Content="Delete Animal" HorizontalAlignment="Left" Margin="360,391,0,0" VerticalAlignment="Top" Width="139"/>
-        <Button Content="Add Animal to Zoo" HorizontalAlignment="Left" Margin="360,16,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button Click="AddAnimalToZoo_Click" Content="Add Animal to Zoo" HorizontalAlignment="Left" Margin="360,16,0,0" VerticalAlignment="Top" Width="139"/>
         <TextBox Name="myTextBox" HorizontalAlignment="Left" Height="23" Margin="10,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="312"/>
 
     </Grid>
